@@ -12,12 +12,18 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class TokimonList {
-    private List<Tokimon> tokimons = new ArrayList<>();
+    private List<Tokimon> tokimons ;
     String filePath = "./jsonFiles/tokimons.json";
+    AtomicInteger counter;
 
+    public TokimonList() {
+        tokimons = new ArrayList<>();
+        counter = new AtomicInteger(1);
+    }
 
     public List<Tokimon> getTokimons() {
         // TODO: read from the json file //
@@ -36,7 +42,9 @@ public class TokimonList {
 
     public void addTokimon(Tokimon tokimon) {
         // TODO: add tokimon to json file //
+
         tokimons.add(tokimon);
+        tokimon.setTid(counter.getAndIncrement());
         try (FileWriter writer = new FileWriter(filePath)) {
             Gson gson = new Gson();
             gson.toJson(tokimons, writer);
@@ -67,6 +75,7 @@ public class TokimonList {
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 tokimons.set(i, newTokimon);
+                newTokimon.setTid(tid);
                 try (FileWriter writer = new FileWriter(filePath)) {
                     Gson gson = new Gson();
                     gson.toJson(tokimons, writer);

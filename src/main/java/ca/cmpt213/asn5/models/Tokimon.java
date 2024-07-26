@@ -1,7 +1,7 @@
 package ca.cmpt213.asn5.models;
 
 public class Tokimon {
-    static private int total=0;
+    //static private int total;
     private long tid;
     private String name;
     private String imagePath;
@@ -15,11 +15,11 @@ public class Tokimon {
         this.name=name;
         this.type=type;
         this.rarityScore=0;
-        this.tid = total++;
+        //this.tid = total++;
         imagePath = null;
     }
     public Tokimon(String imagePath, String name, String type, int rarityScore) {
-        this.tid = total++;
+        //this.tid = ++total;
         this.imagePath = imagePath;
         this.name = name;
         this.type = type;
