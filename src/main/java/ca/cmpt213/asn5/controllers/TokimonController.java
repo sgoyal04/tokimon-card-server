@@ -11,34 +11,34 @@ import java.util.List;
 public class TokimonController {
     private TokimonList tokimonList = new TokimonList();
 
-    @GetMapping("/tokimon")
+    @GetMapping("/tokimon/all")
     public List<Tokimon> getTokimonList() {
         return tokimonList.getTokimons();
     }
 
-    @PostMapping("/tokimon")
+    @GetMapping("/tokimon/{tid}")
+    public Tokimon getTokimon(@PathVariable long tid) {
+        return tokimonList.getTokimonWithTid(tid);
+    }
+
+    @PostMapping("/tokimon/add")
     public Tokimon addTokimon(@RequestBody Tokimon newTokimon, HttpServletResponse response){
         tokimonList.addTokimon(newTokimon);
         response.setStatus(HttpServletResponse.SC_CREATED);
-        return newTokimon;
+        return newTokimon;      // TODO: Will make this function void once testing is done.
     }
 
-    //This function is returning null everytime - Might be the reference issue in TokimonList -  debugging required
     @DeleteMapping("/tokimon/{tid}")
     public Tokimon deleteTokimon(@PathVariable long tid, HttpServletResponse response){
-        tokimonList.deleteTokimon(tid);
-        response.setStatus(HttpServletResponse.SC_CREATED);
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         return tokimonList.deleteTokimon(tid);
     }
 
-
-    @PutMapping("/tokimon/{tid}")
+    @PutMapping("/tokimon/edit/{tid}")
     public Tokimon updateTokimon(@PathVariable long tid, @RequestBody Tokimon newTokimon , HttpServletResponse response){
-        //TODO: edit the json file with newTokimon
         tokimonList.editTokimon(tid, newTokimon);
         newTokimon.setTid(tid);
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return newTokimon;
+        return newTokimon;  // TODO: will make this function void once all the testing is done.
     }
 
 }

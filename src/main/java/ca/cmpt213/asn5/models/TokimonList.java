@@ -40,6 +40,15 @@ public class TokimonList {
         return tokimons;
     }
 
+    public Tokimon getTokimonWithTid(long tid) {
+        for(int i = 0 ; i < tokimons.size() ; i++) {
+            if(tokimons.get(i).getTid() == tid) {
+                return tokimons.get(i);
+            }
+        }
+        return null;
+    }
+
     public void addTokimon(Tokimon tokimon) {
         // TODO: add tokimon to json file //
 
@@ -53,6 +62,7 @@ public class TokimonList {
         }
     }
 
+    //TODO: This function can be void its returning null everytime.
     public Tokimon deleteTokimon(long tid) {
         // TODO: delete tokimon tid from json file //
         for (int i=0; i<tokimons.size(); i++) {
@@ -71,7 +81,13 @@ public class TokimonList {
         return null;
     }
 
+    /**
+     * This function edit the tokimon with a given tid and update the json file with new tokimons
+     * @param tid   the tokimon id
+     * @param newTokimon    The new tokimon replacing the old tokimon
+     */
     public void editTokimon(long tid, Tokimon newTokimon) {
+        // TODO: return something to indicate if tid is invalid.
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 tokimons.set(i, newTokimon);
