@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TokimonList {
     private List<Tokimon> tokimons = new ArrayList<>();
-    String filePath = "file:jsonFiles/tokimons.json";
+    String filePath = "./jsonFiles/tokimons.json";
 
 
     public List<Tokimon> getTokimons() {
@@ -61,6 +61,20 @@ public class TokimonList {
             }
         }
         return null;
+    }
+
+    public void editTokimon(long tid, Tokimon newTokimon) {
+        for (int i=0; i<tokimons.size(); i++) {
+            if(tokimons.get(i).getTid() == tid) {
+                tokimons.set(i, newTokimon);
+                try (FileWriter writer = new FileWriter(filePath)) {
+                    Gson gson = new Gson();
+                    gson.toJson(tokimons, writer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
