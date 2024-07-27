@@ -3,6 +3,7 @@ package ca.cmpt213.asn5.models;
 import com.google.gson.Gson;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
@@ -52,11 +53,29 @@ public class TokimonList {
     public void addTokimon(Tokimon tokimon) {
         // TODO: add tokimon to json file //
 
-        tokimons.add(tokimon);
-        tokimon.setTid(counter.getAndIncrement());
-        try (FileWriter writer = new FileWriter(filePath)) {
+        List<Tokimon> existingTokimons = new ArrayList<>();
+        try (FileReader reader = new FileReader(filePath)) {
             Gson gson = new Gson();
-            gson.toJson(tokimons, writer);
+            Type tokimonListType = new TypeToken<ArrayList<Tokimon>>() {}.getType();
+            existingTokimons = gson.fromJson(reader, tokimonListType);
+            if (existingTokimons == null) {
+                existingTokimons = new ArrayList<>();
+            }
+        } catch (FileNotFoundException e) {
+            // File not found, initialize an empty list
+            existingTokimons = new ArrayList<>();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Add new Tokimon to the list
+        tokimon.setTid(counter.getAndIncrement());
+        existingTokimons.add(tokimon);
+
+        // Write updated list to the file with pretty printing
+        try (FileWriter writer = new FileWriter(filePath)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(existingTokimons, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
