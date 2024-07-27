@@ -5,3 +5,4 @@
 5) Create tests for Each mapping - test class
 6) Add image to the tokimons.
 7) Add javadoc comments on Controller class - Sanika
+8) Complete TODO list on controller class - remove unneccassary returns before submiting assignment.
