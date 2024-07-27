@@ -13,45 +13,37 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 
 public class TokimonList {
-    private List<Tokimon> tokimons ;
+    private List<Tokimon> tokimons = new ArrayList<>();
     String filePath = "./jsonFiles/tokimons.json";
-    AtomicInteger counter;
-
-    public TokimonList() {
-        tokimons = new ArrayList<>();
-        counter = new AtomicInteger(1);
-    }
 
     public List<Tokimon> getTokimons() {
-        // TODO: read from the json file //
+        // TODO: do we need this if statement???? should we read from json file anyway??
         if (tokimons.isEmpty()) {
-
-            try(FileReader reader = new FileReader(filePath)) {
-                Gson gson = new Gson();
-                Type tokimonListType = new TypeToken<ArrayList<Tokimon>>(){}.getType();
-                tokimons = gson.fromJson(reader, tokimonListType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            getTokimonsFromJsonFile();
         }
         return tokimons;
     }
 
     public Tokimon getTokimonWithTid(long tid) {
-        for(int i = 0 ; i < tokimons.size() ; i++) {
-            if(tokimons.get(i).getTid() == tid) {
-                return tokimons.get(i);
+        getTokimonsFromJsonFile();
+        for (Tokimon tokimon : tokimons) {
+            if (tokimon.getTid() == tid) {
+                return tokimon;
             }
         }
         return null;
     }
 
+
+
     public void addTokimon(Tokimon tokimon) {
-        // TODO: add tokimon to json file //
+        // TODO: do we really need this new variable existingTokimons??? can we use tokimons - class variable??
+        // TODO: if using class variable, can we replace code to read json file with
+        //  getTokimonsFromJasonFile() method call?
 
         List<Tokimon> existingTokimons = new ArrayList<>();
         try (FileReader reader = new FileReader(filePath)) {
@@ -69,33 +61,25 @@ public class TokimonList {
         }
 
         // Add new Tokimon to the list
-        tokimon.setTid(counter.getAndIncrement());
         existingTokimons.add(tokimon);
+        tokimons.add(tokimon);
 
         // Write updated list to the file with pretty printing
-        try (FileWriter writer = new FileWriter(filePath)) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(existingTokimons, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeTokimonsInJsonFile();
     }
 
 
     public void deleteTokimon(long tid) {
+        getTokimonsFromJsonFile();
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 Tokimon tokimon = tokimons.get(i);
                 tokimons.remove(tokimon);
-                try (FileWriter writer = new FileWriter(filePath)) {
-                    Gson gson = new Gson();
-                    gson.toJson(tokimons, writer);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                writeTokimonsInJsonFile();
             }
         }
     }
+
 
     /**
      * This function edit the tokimon with a given tid and update the json file with new tokimons
@@ -103,18 +87,38 @@ public class TokimonList {
      * @param newTokimon    The new tokimon replacing the old tokimon
      */
     public void editTokimon(long tid, Tokimon newTokimon) {
-        // TODO: return something to indicate if tid is invalid.
+
+        getTokimonsFromJsonFile();              //Reads tokimons from json file and store them in class variable
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 tokimons.set(i, newTokimon);
-                newTokimon.setTid(tid);
-                try (FileWriter writer = new FileWriter(filePath)) {
-                    Gson gson = new Gson();
-                    gson.toJson(tokimons, writer);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                writeTokimonsInJsonFile();      //Write tokimons on json file from class variable
             }
+        }
+    }
+
+    /**
+     * This function reads tokimons from json file and store them in a class variable tokimons.
+     */
+    private void getTokimonsFromJsonFile() {
+        try(FileReader reader = new FileReader(filePath)) {
+            Gson gson = new Gson();
+            Type tokimonListType = new TypeToken<ArrayList<Tokimon>>(){}.getType();
+            tokimons = gson.fromJson(reader, tokimonListType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This function write tokimons on the json file.
+     */
+    public void writeTokimonsInJsonFile() {
+        try (FileWriter writer = new FileWriter(filePath)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(tokimons, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
