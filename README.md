@@ -4,3 +4,4 @@
 4) Add javadoc comments to tokimon class
 5) Create tests for Each mapping - test class
 6) Add image to the tokimons.
+7) Add javadoc comments on Controller class - Sanika
