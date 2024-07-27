@@ -1,20 +1,16 @@
 [
   {
     "tid": 1,
-    "name": "Pikachu",
+    "name": "squirtle",
+    "imagePath": "https://images.app.goo.gl/sNCqAB6Y57EtwH2D6",
     "type": "water",
-    "rarityScore": 8
-  },
-  {
-    "tid": 2,
-    "name": "Baku",
-    "type": "fire",
-    "rarityScore": 5
+    "rarityScore": 3
   },
   {
     "tid": 1,
-    "name": "Hikitachu",
-    "type": "earth",
-    "rarityScore": 7
+    "name": "bulbasaur",
+    "imagePath": "https://images.app.goo.gl/7JxfZAWe75nPbf196",
+    "type": "plant",
+    "rarityScore": 1
   }
 ]
