@@ -29,9 +29,9 @@ public class TokimonController {
     }
 
     @DeleteMapping("/tokimon/{tid}")
-    public Tokimon deleteTokimon(@PathVariable long tid, HttpServletResponse response){
+    public void deleteTokimon(@PathVariable long tid, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        return tokimonList.deleteTokimon(tid);
+        tokimonList.deleteTokimon(tid);
     }
 
     @PutMapping("/tokimon/edit/{tid}")

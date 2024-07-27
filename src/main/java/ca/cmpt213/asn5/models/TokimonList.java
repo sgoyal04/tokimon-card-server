@@ -81,9 +81,8 @@ public class TokimonList {
         }
     }
 
-    //TODO: This function can be void its returning null everytime.
-    public Tokimon deleteTokimon(long tid) {
-        // TODO: delete tokimon tid from json file //
+
+    public void deleteTokimon(long tid) {
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 Tokimon tokimon = tokimons.get(i);
@@ -94,10 +93,8 @@ public class TokimonList {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return tokimon;
             }
         }
-        return null;
     }
 
     /**
