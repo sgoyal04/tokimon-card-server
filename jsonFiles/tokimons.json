@@ -7,10 +7,17 @@
     "rarityScore": 3
   },
   {
-    "tid": 1,
+    "tid": 2,
     "name": "bulbasaur",
     "imagePath": "https://images.app.goo.gl/7JxfZAWe75nPbf196",
     "type": "plant",
     "rarityScore": 1
+  },
+  {
+    "tid": 3,
+    "name": "pikachu",
+    "imagePath": "https://images.app.goo.gl/34seS21ZHLmyxa347",
+    "type": "electric",
+    "rarityScore": 5
   }
 ]
