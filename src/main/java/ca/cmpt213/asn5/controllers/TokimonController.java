@@ -25,6 +25,7 @@ public class TokimonController {
     @PostConstruct
     public void init() {
         tokimonList = new TokimonList();
+
         nextTid = new AtomicInteger(1);
     }
 

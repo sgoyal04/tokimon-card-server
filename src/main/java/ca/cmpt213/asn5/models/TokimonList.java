@@ -28,12 +28,25 @@ public class TokimonList {
      * @return returns the tokimon list
      */
     public List<Tokimon> getTokimons() {
-        // TODO: do we need this if statement???? should we read from json file anyway??
-        // I think we can get rid of the if statement, sounds good.
-
         getTokimonsFromJsonFile();
         return tokimons;
     }
+
+    /**
+     * This function provides the maximum tokimon id of the tokimons in json file.
+     * @return maximum tokimon id
+     */
+    public long getMaxTid(){
+        getTokimonsFromJsonFile();
+        long maxTid = -1;
+        for(Tokimon t : tokimons){
+            if(t.getTid() > maxTid){
+                maxTid = t.getTid();
+            }
+        }
+        return maxTid;
+    }
+
 
     /**
      * This function gets the tokimon from the json file based on the corresponding id and returns it
