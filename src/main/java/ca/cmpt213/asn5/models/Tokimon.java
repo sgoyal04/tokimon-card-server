@@ -1,5 +1,10 @@
 package ca.cmpt213.asn5.models;
 
+/**
+ * This class creates the Tokimon object to be written in the json file
+ * Includes all getters and setters
+ */
+
 public class Tokimon {
 
     private long tid;
