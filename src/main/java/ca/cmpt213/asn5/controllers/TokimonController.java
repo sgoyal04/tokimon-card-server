@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * This is a controller class responsible to receive and complete the client's requests.
@@ -17,7 +18,7 @@ public class TokimonController {
 
     //Class variables
     private TokimonList tokimonList;
-    private AtomicInteger nextTid;
+    private AtomicLong nextTid;
 
     /**
      * This function initialises class variables as soon as server starts.
@@ -25,8 +26,7 @@ public class TokimonController {
     @PostConstruct
     public void init() {
         tokimonList = new TokimonList();
-
-        nextTid = new AtomicInteger(1);
+        nextTid = new AtomicLong(tokimonList.getMaxTid()+1);
     }
 
     /**
