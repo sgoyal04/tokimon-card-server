@@ -30,8 +30,9 @@ public class TokimonList {
     public List<Tokimon> getTokimons() {
         // TODO: do we need this if statement???? should we read from json file anyway??
         // I think we can get rid of the if statement, sounds good.
-
-        getTokimonsFromJsonFile();
+        if(tokimons.isEmpty()) {
+            getTokimonsFromJsonFile();
+        }
         return tokimons;
     }
 
