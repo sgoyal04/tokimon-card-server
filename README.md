@@ -1,4 +1,4 @@
-1) Complete TODO on tokimonList - Sanika
+1) Complete TODO on tokimonList - Gurveen - done
 2) everytime new server is started tid starts from 1 - any solution to do that ? Figure it out? - Sanika
 3) Add javadoc comments to the TokimonList class and methods - Gurveen - done
 4) Add javadoc comments to tokimon class - Gurveen - done
