@@ -1,15 +1,13 @@
 package ca.cmpt213.asn5.models;
 
 import com.google.gson.Gson;
-
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +36,12 @@ public class TokimonList {
      */
     public long getMaxTid(){
         getTokimonsFromJsonFile();
-        long maxTid = -1;
-        for(Tokimon t : tokimons){
-            if(t.getTid() > maxTid){
-                maxTid = t.getTid();
+        long maxTid = 0;
+        if(tokimons!=null && tokimons.size() > 0){
+            for(Tokimon t : tokimons){
+                if(t.getTid() > maxTid){
+                    maxTid = t.getTid();
+                }
             }
         }
         return maxTid;
@@ -71,34 +71,14 @@ public class TokimonList {
      * @param tokimon the new tokimon created
      */
     public void addTokimon(Tokimon tokimon) {
-        // TODO: do we really need this new variable existingTokimons??? can we use tokimons - class variable??
-        // TODO: if using class variable, can we replace code to read json file with
-        //  getTokimonsFromJasonFile() method call?
 
-        // i tried using getTokimonFrom JsonFile but its not wokring, so we should just keep it like this for now
-
-        List<Tokimon> existingTokimons = new ArrayList<>();
-        try (FileReader reader = new FileReader(filePath)) {
-            Gson gson = new Gson();
-            Type tokimonListType = new TypeToken<ArrayList<Tokimon>>() {}.getType();
-            existingTokimons = gson.fromJson(reader, tokimonListType);
-            if (existingTokimons == null) {
-                existingTokimons = new ArrayList<>();
-            }
-        } catch (FileNotFoundException e) {
-            // File not found, initialize an empty list
-            existingTokimons = new ArrayList<>();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //getTokimonsFromJsonFile();
+        // Initialise tokimons from json file if any
+        getTokimonsFromJsonFile();
 
         // Add new Tokimon to the list
-        existingTokimons.add(tokimon);
         tokimons.add(tokimon);
 
-
-        // Write updated list to the file with pretty printing
+        // Write updated list of tokimons to json file
         writeTokimonsInJsonFile();
     }
 
@@ -108,14 +88,21 @@ public class TokimonList {
      * @param tid the tokimon id
      */
     public void deleteTokimon(long tid) {
+
+        // Initialise tokimons from json file
         getTokimonsFromJsonFile();
+
+        // delete tokimon with given tid
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 Tokimon tokimon = tokimons.get(i);
                 tokimons.remove(tokimon);
-                writeTokimonsInJsonFile();
+                break;
             }
         }
+
+        // Write updated list of tokimons to json file
+        writeTokimonsInJsonFile();
     }
 
 
@@ -126,13 +113,20 @@ public class TokimonList {
      */
     public void editTokimon(long tid, Tokimon newTokimon) {
 
-        getTokimonsFromJsonFile();              //Reads tokimons from json file and store them in class variable
+        //Reads tokimons from json file and store them in class variable
+        getTokimonsFromJsonFile();
+
+        //Edit the tokimon with given tid
         for (int i=0; i<tokimons.size(); i++) {
             if(tokimons.get(i).getTid() == tid) {
                 tokimons.set(i, newTokimon);
-                writeTokimonsInJsonFile();      //Write tokimons on json file from class variable
+                break;
             }
         }
+
+        //Write tokimons on json file from class variable
+        writeTokimonsInJsonFile();
+
     }
 
     /**
@@ -143,6 +137,9 @@ public class TokimonList {
             Gson gson = new Gson();
             Type tokimonListType = new TypeToken<ArrayList<Tokimon>>(){}.getType();
             tokimons = gson.fromJson(reader, tokimonListType);
+            if(tokimons == null){
+                tokimons = new ArrayList<>();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
