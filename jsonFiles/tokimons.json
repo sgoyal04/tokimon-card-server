@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "tid": 6,
+    "name": "snoralx",
+    "imagePath": "https://assets.pokemon.com/assets/cms2/img/pokedex/full//143.png",
+    "type": "normal",
+    "rarityScore": 2
+  }
+]
