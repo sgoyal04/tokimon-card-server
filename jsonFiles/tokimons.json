@@ -28,17 +28,10 @@
     "rarityScore": 5
   },
   {
-    "tid": 13,
-    "name": "Latios",
-    "imagePath": "https://static.wikia.nocookie.net/legendsofthemultiuniverse/images/6/61/381-Latios.png/revision/latest?cb\u003d20200526235235",
-    "type": "fire",
-    "rarityScore": 6
-  },
-  {
     "tid": 14,
     "name": "Bulbasa",
     "imagePath": "https://static.wikia.nocookie.net/legendsofthemultiuniverse/images/4/4c/001_bulbasaur_by_pklucario-d5z1g10.png/revision/latest?cb\u003d20170701131534",
-    "type": "water",
+    "type": "earth",
     "rarityScore": 7
   }
 ]
