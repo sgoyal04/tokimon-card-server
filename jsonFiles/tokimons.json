@@ -4,7 +4,7 @@
     "name": "snorlax",
     "imagePath": "https://assets.pokemon.com/assets/cms2/img/pokedex/full//143.png",
     "type": "earth",
-    "rarityScore": 7
+    "rarityScore": 45
   },
   {
     "tid": 9,
@@ -26,5 +26,19 @@
     "imagePath": "https://img.pokemondb.net/artwork/large/eevee-lets-go.jpg",
     "type": "earth",
     "rarityScore": 5
+  },
+  {
+    "tid": 13,
+    "name": "Latios",
+    "imagePath": "https://static.wikia.nocookie.net/legendsofthemultiuniverse/images/6/61/381-Latios.png/revision/latest?cb\u003d20200526235235",
+    "type": "fire",
+    "rarityScore": 6
+  },
+  {
+    "tid": 14,
+    "name": "Bulbasa",
+    "imagePath": "https://static.wikia.nocookie.net/legendsofthemultiuniverse/images/4/4c/001_bulbasaur_by_pklucario-d5z1g10.png/revision/latest?cb\u003d20170701131534",
+    "type": "water",
+    "rarityScore": 7
   }
 ]
