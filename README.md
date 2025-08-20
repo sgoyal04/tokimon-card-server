@@ -39,6 +39,9 @@ Each Tokimon card includes:
 - `type`: Element type (e.g., Electric, Water)
 - `rarityScore`: Rarity indicator
 
+## Checkout Tokimon Client
+[Tokimon Client](https://github.com/sgoyal04/tokimon-card-Client)
+
 ## Contact
 
 Created by Sanika and Gurveen.
